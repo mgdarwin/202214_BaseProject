@@ -8,5 +8,7 @@ export function BusinessLogicException(message: string, type: number) {
     NOT_FOUND,
     PRECONDITION_FAILED,
     BAD_REQUEST,
+    TYPE_IS_NOT_VALID,
+    VALUE_IS_NOT_VALID,
   }
   

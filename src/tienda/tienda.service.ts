@@ -9,7 +9,7 @@ export class TiendaService {
   constructor(
     @InjectRepository(TiendaEntity)
     private readonly tiendaRepository: Repository<TiendaEntity>,
-  ) {}
+  ) { }
 
   // Obtener todas las tiendas
   async findAll(): Promise<TiendaEntity[]> {
@@ -30,9 +30,13 @@ export class TiendaService {
 
     return tienda;
   }
-  
+
   // Crear una nueva tienda
   async create(tienda: TiendaEntity): Promise<TiendaEntity> {
+    if (tienda.ciudad.length !== 3) {
+      throw new BusinessLogicException('El nombre de la ciudad debe tener una logitud de tres caracteres', BusinessError.VALUE_IS_NOT_VALID);
+    }
+    tienda.ciudad = tienda.ciudad.toUpperCase();
     return await this.tiendaRepository.save(tienda);
   }
 
@@ -47,6 +51,10 @@ export class TiendaService {
         BusinessError.NOT_FOUND,
       );
 
+    if (tienda.ciudad.length !== 3) {
+      throw new BusinessLogicException('El nombre de la ciudad debe tener una logitud de tres caracteres', BusinessError.VALUE_IS_NOT_VALID);
+    }
+    tienda.ciudad = tienda.ciudad.toUpperCase();
     return await this.tiendaRepository.save({ ...persistedTienda, ...tienda });
   }
 

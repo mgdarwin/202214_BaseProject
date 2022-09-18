@@ -1,0 +1,813 @@
+{
+	"info": {
+		"_postman_id": "f48b72da-fc30-42c4-afe5-d39dc55426c6",
+		"name": "Productos--Tiendas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15428078"
+	},
+	"item": [
+		{
+			"name": "Agregar una tienda a un producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/productos/{{producto_id}}/tiendas/{{tienda_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"productos",
+						"{{producto_id}}",
+						"tiendas",
+						"{{tienda_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar una tienda invalida a un producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"La tienda con el ID suministrado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/productos/{{producto_id}}/tiendas/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"productos",
+						"{{producto_id}}",
+						"tiendas",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add an artwork to an invalid museum",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/museums/00000000-0000-0000-0000-000000000000/artworks/{{artwork_id_1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"museums",
+								"00000000-0000-0000-0000-000000000000",
+								"artworks",
+								"{{artwork_id_1}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "73"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"49-v/cpCsS/IuHJb9v22y7e8zPAYzs\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 02 Aug 2022 20:12:51 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The museum with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener todas las tiendas que ofrecen un producto valido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/productos/{{producto_id}}/tiendas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"productos",
+						"{{producto_id}}",
+						"tiendas"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all artwork of a museum",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/museums/{{museum_id}}/artworks/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"museums",
+								"{{museum_id}}",
+								"artworks",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "377"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"179-6S7ZAxEW3K6BN+FOKdKf3W/TOeg\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 02 Aug 2022 20:21:36 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"28a6bcd5-7f74-4d31-ac70-456d0c520544\",\n        \"name\": \"La Femme qui pleure\",\n        \"year\": 1837,\n        \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\n        \"type\": \"Painting\",\n        \"mainImage\": \"https://assets.catawiki.nl/assets/2019/3/7/2/f/5/2f5c8a17-0b06-4f26-b4a7-4fa51a430ce1.jpg\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener una tienda que ofrece un producto valido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/productos/{{producto_id}}/tiendas/{{tienda_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"productos",
+						"{{producto_id}}",
+						"tiendas",
+						"{{tienda_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get an artwork of a museum",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/museums/{{museum_id}}/artworks/{{artwork_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"museums",
+								"{{museum_id}}",
+								"artworks",
+								"{{artwork_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "375"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"177-ikNQ+rTE1CHOKyECsxXWUY0AeNY\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 02 Aug 2022 19:41:52 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"7e265679-3a85-416d-afca-80fd04e2b79c\",\n    \"name\": \"La Femme qui pleure\",\n    \"year\": 1837,\n    \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\n    \"type\": \"Painting\",\n    \"mainImage\": \"https://assets.catawiki.nl/assets/2019/3/7/2/f/5/2f5c8a17-0b06-4f26-b4a7-4fa51a430ce1.jpg\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener una tiemda qie opfrecce un producto invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"El producto con el ID suministrado no fue encontrado\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/productos/00000000-0000-0000-0000-000000000000/tiendas/{{tienda_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"productos",
+						"00000000-0000-0000-0000-000000000000",
+						"tiendas",
+						"{{tienda_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get an artwork of an invalid museum",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/museums/00000000-0000-0000-0000-000000000000/artworks/{{artwork_id_1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"museums",
+								"00000000-0000-0000-0000-000000000000",
+								"artworks",
+								"{{artwork_id_1}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "73"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"49-v/cpCsS/IuHJb9v22y7e8zPAYzs\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 02 Aug 2022 20:17:49 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The museum with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar tiendas que ofrecen un producto valido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"id\": \"{{tienda_id_2}}\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/productos/{{producto_id}}/tiendas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"productos",
+						"{{producto_id}}",
+						"tiendas"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update artworks of a museum",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"{{artwork_id_2}}\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/museums/{{museum_id}}/artworks",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"museums",
+								"{{museum_id}}",
+								"artworks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1149"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"47d-lloYeq9lZuh7ys1VbmtoB9Zh6o4\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 02 Aug 2022 19:56:52 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"00519f14-2cd5-4a21-810d-39b06319bb54\",\n    \"name\": \"Smithsonian national museum of natural history\",\n    \"description\": \"The world's most popular natural history museum is dedicated to understanding the natural world and our place in it. Delve into the fascinating story of our planet, from its fiery beginnings through billions of years of transformation, and explore life on Earth through exhibitions and activities, collection objects and research that happens in the lab and in the field. The museum is larger than 18 football fields and is home to the largest natural history collection in the world.\",\n    \"address\": \"10th St. & Constitution Ave. NW, Washington, DC\",\n    \"city\": \"Washington DC\",\n    \"image\": \"https://www.si.edu/sites/default/files/newsdesk/fact_sheets/nhb2015-02891.jpg\",\n    \"artworks\": [\n        {\n            \"id\": \"c3039d8c-baaf-45f3-96de-7277936a374d\",\n            \"name\": \"La Vie\",\n            \"year\": 1903,\n            \"description\": \"La Vie (Zervos I 179) is a 1903 oil painting by Pablo Picasso. It is widely regarded as the pinnacle of Picasso's Blue Period\",\n            \"type\": \"Painting\",\n            \"mainImage\": \"https://upload.wikimedia.org/wikipedia/en/thumb/1/11/La_Vie_by_Pablo_Picasso.jpg/800px-La_Vie_by_Pablo_Picasso.jpg\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar una tienda invalida que ofrece un producto valido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"La tienda con el ID suministrado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"id\": \"00000000-0000-0000-0000-000000000000\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/productos/{{producto_id}}/tiendas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"productos",
+						"{{producto_id}}",
+						"tiendas"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update artworks of a museum",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"{{artwork_id_2}}\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/museums/{{museum_id}}/artworks",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"museums",
+								"{{museum_id}}",
+								"artworks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1149"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"47d-lloYeq9lZuh7ys1VbmtoB9Zh6o4\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 02 Aug 2022 19:56:52 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"00519f14-2cd5-4a21-810d-39b06319bb54\",\n    \"name\": \"Smithsonian national museum of natural history\",\n    \"description\": \"The world's most popular natural history museum is dedicated to understanding the natural world and our place in it. Delve into the fascinating story of our planet, from its fiery beginnings through billions of years of transformation, and explore life on Earth through exhibitions and activities, collection objects and research that happens in the lab and in the field. The museum is larger than 18 football fields and is home to the largest natural history collection in the world.\",\n    \"address\": \"10th St. & Constitution Ave. NW, Washington, DC\",\n    \"city\": \"Washington DC\",\n    \"image\": \"https://www.si.edu/sites/default/files/newsdesk/fact_sheets/nhb2015-02891.jpg\",\n    \"artworks\": [\n        {\n            \"id\": \"c3039d8c-baaf-45f3-96de-7277936a374d\",\n            \"name\": \"La Vie\",\n            \"year\": 1903,\n            \"description\": \"La Vie (Zervos I 179) is a 1903 oil painting by Pablo Picasso. It is widely regarded as the pinnacle of Picasso's Blue Period\",\n            \"type\": \"Painting\",\n            \"mainImage\": \"https://upload.wikimedia.org/wikipedia/en/thumb/1/11/La_Vie_by_Pablo_Picasso.jpg/800px-La_Vie_by_Pablo_Picasso.jpg\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Borrar una tienda valida de un producto valido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/productos/{{producto_id}}/tiendas/{{tienda_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"productos",
+						"{{producto_id}}",
+						"tiendas",
+						"{{tienda_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an artwork of a museum",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/museums/{{museum_id}}/artworks/{{artwork_id_2}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"museums",
+								"{{museum_id}}",
+								"artworks",
+								"{{artwork_id_2}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 02 Aug 2022 20:50:16 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Borrar una tienda valida de un producto invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"El producto con el ID suministrado no fue encontrado\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/productos/00000000-0000-0000-0000-000000000000/tiendas/{{tienda_id_2}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"productos",
+						"00000000-0000-0000-0000-000000000000",
+						"tiendas",
+						"{{tienda_id_2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an artwork of an invalid museum",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/museums/00000000-0000-0000-0000-000000000000/artworks/{{artwork_id_2}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"museums",
+								"00000000-0000-0000-0000-000000000000",
+								"artworks",
+								"{{artwork_id_2}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "73"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"49-v/cpCsS/IuHJb9v22y7e8zPAYzs\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 02 Aug 2022 20:50:26 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The museum with the given id was not found\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1",
+			"type": "string"
+		}
+	]
+}
