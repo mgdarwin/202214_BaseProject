@@ -29,7 +29,7 @@ describe('TiendaService', () => {
     for (let i = 0; i < 5; i++) {
       const tienda: TiendaEntity = await repository.save({
         nombre: faker.company.name(),
-        ciudad: faker.address.cityName().slice(0,2).toUpperCase(),
+        ciudad: faker.address.cityName().slice(0,3).toUpperCase(),
         direccion: faker.address.streetAddress(true)
       })
       tiendasList.push(tienda);
@@ -59,7 +59,7 @@ describe('TiendaService', () => {
     const tienda: TiendaEntity = {
       id: "",
       nombre: faker.company.name(),
-      ciudad: faker.address.cityName().slice(0,2).toUpperCase(),
+      ciudad: faker.address.cityName().slice(0,3).toUpperCase(),
       direccion: faker.address.streetAddress(true),
       productos: []
     }
@@ -74,10 +74,10 @@ describe('TiendaService', () => {
     expect(storedTienda.direccion).toEqual(newTienda.direccion)
   });
 
-  it('update deberia modificar una tienda ya creada', async () => {
+   it('update deberia modificar una tienda ya creada', async () => {
     const tienda: TiendaEntity = tiendasList[0];
     tienda.nombre = "New nombre";
-    tienda.ciudad = "New ciudad";
+    tienda.ciudad = "CAL";
 
     const updatedTienda: TiendaEntity = await service.update(tienda.id, tienda);
     expect(updatedTienda).not.toBeNull();

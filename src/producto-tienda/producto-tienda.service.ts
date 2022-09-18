@@ -15,9 +15,6 @@ export class ProductoTiendaService {
     private readonly tiendaRepository: Repository<TiendaEntity>,
   ) {}
 
-  // M-useo ---- Producto
-  // A-rtwork -- Tienda
-
   // Asociar una tienda a un producto. (addStoreToProduct)
   async addStoreToProduct(productoId: string, tiendaId: string): Promise<ProductoEntity> {
     const tienda: TiendaEntity = await this.tiendaRepository.findOne({where: { id: tiendaId }});

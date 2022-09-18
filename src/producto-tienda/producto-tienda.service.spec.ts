@@ -8,9 +8,6 @@ import { TiendaEntity } from '../tienda/tienda.entity';
 import { Repository } from 'typeorm';
 import { ProductoTiendaService } from '../producto-tienda/producto-tienda.service';
 
-// Museo ---- Producto
-// Tienda -- Tienda
-
 describe('ProductoTiendaService', () => {
   let service: ProductoTiendaService;
   let productoRepository: Repository<ProductoEntity>;
