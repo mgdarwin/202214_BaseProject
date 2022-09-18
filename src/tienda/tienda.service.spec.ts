@@ -29,7 +29,7 @@ describe('TiendaService', () => {
     for (let i = 0; i < 5; i++) {
       const tienda: TiendaEntity = await repository.save({
         nombre: faker.company.name(),
-        ciudad: faker.address.cityName(),
+        ciudad: faker.address.cityName().slice(0,2).toUpperCase(),
         direccion: faker.address.streetAddress(true)
       })
       tiendasList.push(tienda);
@@ -59,7 +59,7 @@ describe('TiendaService', () => {
     const tienda: TiendaEntity = {
       id: "",
       nombre: faker.company.name(),
-      ciudad: faker.address.cityName(),
+      ciudad: faker.address.cityName().slice(0,2).toUpperCase(),
       direccion: faker.address.streetAddress(true),
       productos: []
     }
