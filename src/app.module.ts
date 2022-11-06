@@ -7,6 +7,7 @@ import { ProductoModule } from './producto/producto.module';
 import { TiendaEntity } from './tienda/tienda.entity';
 import { TiendaModule } from './tienda/tienda.module';
 import { ProductoTiendaModule } from './producto-tienda/producto-tienda.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -15,18 +16,24 @@ import { ProductoTiendaModule } from './producto-tienda/producto-tienda.module';
     ProductoTiendaModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: process.env.DB_HOST,
       port: 5432,
-      username: 'postgres',
-      password: 'postgres',
-      database: 'producto',
+      username: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      //database: 'producto',
+      database: process.env.DB_DATABASE,
       entities: [ProductoEntity, TiendaEntity],
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true,
     }),
+    ConfigModule.forRoot({
+      envFilePath: process.env.NODE_ENV
+        ? `${process.env.NODE_ENV}.env`
+        : '.development.env',
+    })
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
