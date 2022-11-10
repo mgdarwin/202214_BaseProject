@@ -140,4 +140,8 @@ describe('ProductoService', () => {
   it('No es booleano', () => {
     expect(service.isNotBoolean(5)).toBe(true);
   });
+
+  it('agrega stringAdd', () => {
+    expect(service.stringAdd("5")).toBe(5);
+  });
 });
