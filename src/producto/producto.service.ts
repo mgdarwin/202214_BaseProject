@@ -136,7 +136,7 @@ export class ProductoService {
 
   stringAdd(numString) {
     var val = parseInt(numString);
-    if (numString === NaN) {
+    if (Number.isNaN(numString)) {
       return 0;
     }
     else {
