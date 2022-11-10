@@ -130,15 +130,9 @@ export class ProductoService {
       return false;
   }
 
-  isNotBoolean(test) {
-    var retVal = false; //or any other initialization
-    if (typeof test === 'boolean') {
-      retVal = false;
-    }
-    else {
-      retVal = true;
-    }
-    return retVal;
+  //corrección issue "Review this redundant assignment: "retVal" already holds the assigned value along all execution paths. #9"
+  isNotBoolean(test){
+    return typeof test !== 'boolean';
   }
 
   stringAdd(numString) {
