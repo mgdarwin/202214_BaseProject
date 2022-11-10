@@ -112,6 +112,17 @@ describe('ProductoTiendaService', () => {
   });
 
 
+  it('findStoreFromProduct debería retornar una tienda de un producto', async () => {
+    const tienda: TiendaEntity = tiendasList[0];
+    const storedTienda: TiendaEntity = await service.findStoreFromProduct(producto.id, tienda.id, )
+    expect(storedTienda).not.toBeNull();
+    expect(storedTienda.nombre).toBe(tienda.nombre);
+    expect(storedTienda.ciudad).toBe(tienda.ciudad);
+    expect(storedTienda.direccion).toBe(tienda.direccion);
+    
+  });
+
+
   // Actualizar las tiendas que tienen un producto. (updateStoresFromProduct)
   it('updateStoresFromProduct deberia actualizar las tiendas asociadas a un producto', async () => {
     const newTienda: TiendaEntity = await tiendaRepository.save({
