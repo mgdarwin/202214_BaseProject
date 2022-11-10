@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { ProductoEntity } from './producto.entity';
 import { BusinessLogicException, BusinessError } from '../shared/errors/business-errors';
 import { TipoProductoPermitido } from '../producto/producto.tipo.enum';
+import { of } from 'rxjs';
 
 @Injectable()
 export class ProductoService {
@@ -106,20 +107,18 @@ export class ProductoService {
     await this.productoRepository.remove(producto);
   }
 
+  //corrección issue "Unexpected var, use let or const instead. on product.service.ts line 113 #12"
   async add(numbers) {
-    var result = 0;
-    var parts = numbers.split(',');
-    for (var i = 0; i < parts.length; i++) {
-      var integer = parseInt(parts[i]);
+    let result = 0;
+    let parts = numbers.split(',');
+    for (let i of parts) {
+      let integer = parseInt(parts[i]);
       if (!isNaN(integer)) {
-        if (integer >= 0) {
-          if (integer <= 1000) {
-            result += integer;
-          }
+        if (integer >= 0 && integer <= 1000) {
+          result += integer;
         }
       }
     }
-
     return result;
   }
 
@@ -131,7 +130,7 @@ export class ProductoService {
   }
 
   //corrección issue "Review this redundant assignment: "retVal" already holds the assigned value along all execution paths. #9"
-  isNotBoolean(test){
+  isNotBoolean(test) {
     return typeof test !== 'boolean';
   }
 
