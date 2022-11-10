@@ -61,7 +61,15 @@ describe('ProductoService', () => {
     expect(producto.tipo).toEqual(storedProducto.tipo)
   });
 
-
+  it('findOneRepeat1 deberia retornar un producto segun ID dado', async () => {
+    const storedProducto: ProductoEntity = productosList[0];
+    const producto: ProductoEntity = await service.findOneRepeat1(storedProducto.id);
+    expect(producto).not.toBeNull();
+    expect(producto.nombre).toEqual(storedProducto.nombre)
+    expect(producto.precio).toEqual(storedProducto.precio)
+    expect(producto.tipo).toEqual(storedProducto.tipo)
+  });
+  
   it('findOne deberia retornar una excepcion para in ID de Producto invalido', async () => {
     await expect(() => service.findOne("0")).rejects.toHaveProperty("message", "El producto con el ID suministrado no fue encontrado")
   });
