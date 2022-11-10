@@ -38,17 +38,8 @@ export class ProductoService {
   }
 
   async findOneRepeat1(id: string): Promise<ProductoEntity> {
-    const producto: ProductoEntity = await this.productoRepository.findOne({
-      where: { id },
-      relations: ['tiendas'],
-    });
-    if (!producto)
-      throw new BusinessLogicException(
-        'El producto con el ID suministrado no fue encontrado',
-        BusinessError.NOT_FOUND,
-      );
-
-    return producto;
+       
+        return this.findOne(id);
   }
 
   async create(producto: ProductoEntity): Promise<ProductoEntity> {
