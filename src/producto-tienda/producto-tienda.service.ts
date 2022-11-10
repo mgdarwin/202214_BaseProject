@@ -92,5 +92,4 @@ async deleteStoreFromProduct(productoId: string, tiendaId: string){
   producto.tiendas = producto.tiendas.filter(e => e.id !== tiendaId);
   await this.productoRepository.save(producto);
 }   
-
 }
