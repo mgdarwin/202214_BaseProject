@@ -136,4 +136,8 @@ describe('ProductoService', () => {
   it('Es número entero', () => {
     expect(service.isNumber(5)).toBe(true);
   });
+
+  it('No es booleano', () => {
+    expect(service.isNotBoolean(5)).toBe(true);
+  });
 });
