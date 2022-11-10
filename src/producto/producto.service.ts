@@ -32,8 +32,6 @@ export class ProductoService {
     return producto;
   }
 
-  //**************************************
-  // Modificacion para prueba de Quality Gate
   async findOneRepeat(id: string): Promise<ProductoEntity> {
     const producto: ProductoEntity = await this.productoRepository.findOne({
       where: { id },
@@ -47,15 +45,20 @@ export class ProductoService {
 
     return producto;
   }
-  //**************************************
 
-  // Crear un nuevo producto
+  async findOneRepeat1(id: string): Promise<ProductoEntity> {
+    const producto: ProductoEntity = await this.productoRepository.findOne({
+      where: { id },
+      relations: ['tiendas'],
+    });
+    if (!producto)
+      throw new BusinessLogicException(
+        'El producto con el ID suministrado no fue encontrado',
+        BusinessError.NOT_FOUND,
+      );
 
-  /*
-  async create(producto: ProductoEntity): Promise<ProductoEntity> {
-    return await this.productoRepository.save(producto);
+    return producto;
   }
-  */
 
   async create(producto: ProductoEntity): Promise<ProductoEntity> {
     if (!Object.values(TipoProductoPermitido).includes(producto.tipo)) {
@@ -102,5 +105,56 @@ export class ProductoService {
 
     await this.productoRepository.remove(producto);
   }
+
+  async add(numbers) {
+    var result = 0;
+    var parts = numbers.split(',');
+    for (var i = 0; i < parts.length; i++) {
+      var integer = parseInt(parts[i]);
+      if (!isNaN(integer)) {
+        if (integer >= 0) {
+          if (integer <= 1000) {
+            result += integer;
+          }
+        }
+      }
+    }
+
+    return result;
+  }
+
+  isNumber(test) {
+    if (typeof test === 'number')
+      return true;
+    else
+      return false;
+  }
+
+  isNotBoolean(test) {
+    var retVal = false; //or any other initialization
+    if (typeof test === 'boolean') {
+      retVal = false;
+    }
+    else {
+      retVal = true;
+    }
+    return retVal;
+  }
+
+  stringAdd(numString) {
+    var val = parseInt(numString);
+    if (numString === NaN) {
+      return 0;
+    }
+    else {
+      return val;
+    }
+  }
+
+  isSomeNumString(numString) {
+    return numString == 5;
+  }
+
+
 }
 
