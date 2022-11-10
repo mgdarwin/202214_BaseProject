@@ -8,6 +8,7 @@ import { ProductoService } from './producto.service';
 import { faker } from '@faker-js/faker';
 import { TipoProductoPermitido } from './producto.tipo.enum';
 
+
 describe('ProductoService', () => {
   let service: ProductoService;
   let repository: Repository<ProductoEntity>;
