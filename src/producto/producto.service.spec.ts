@@ -132,4 +132,8 @@ describe('ProductoService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  it('Es número entero', () => {
+    expect(service.isNumber(5)).toBe(true);
+  });
 });
