@@ -106,8 +106,8 @@ export class TiendaService {
   }
 
   stringAdd(numString) {
-    var val = parseInt(numString);
-    if (numString === NaN) {
+    let val = parseInt(numString);
+    if (numString === isNaN) {
       return 0;
     }
     else {
